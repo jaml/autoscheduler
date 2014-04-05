@@ -51,8 +51,20 @@ if ($client->getAccessToken()) {
 			$calListEntry['id']);
 		$calListIndex += 1;
 	}
+	
 	// show user a form of calendar names ('summary') to pick from
-	// TODO form here
+	echo '<div id="cal_sel_form_div">';
+	echo '<form name="cal_sel_form" method="POST" action="calSel.php">';
+	echo '<label>Choose calendar:</label><br /><br />';
+	foreach($calIdList as $calIdListEntry)
+	{
+		echo '<input type="radio" name="cal" value="' . $calIdListEntry[1]
+			. '" /><span>' . $calIdListEntry[0] . '</span><br />';
+	}
+
+	echo '<input type="submit" value="Select"></form></div>';
+
+	//isset POST header redirect here after figure out logic
 	
 	$_SESSION['token'] = $client->getAccessToken();
 } else {
