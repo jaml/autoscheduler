@@ -22,9 +22,9 @@ $maxTime->add(new DateInterval('P7D'));
 
 // Freebusy query
 $freeReq = new Google_Service_Calendar_FreeBusyRequest;
-// how am I supposed to format a datetime string for use with this function?
-$freeReq->setTimeMin($today);
-$freeReq->setTimeMax($maxTime);
+// time format: 2012-07-12T09:30:00.0z (string)
+$freeReq->setTimeMin(date_format($today, 'Y-m-d\TH:i:s.0\z'));
+$freeReq->setTimeMax(date_format($maxTime, 'Y-m-d\TH:i:s.0\z'));
 $freeReq->setTimeZone($timeZone);
 
 $freeRsrc = $cal->freebusy;
