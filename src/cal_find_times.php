@@ -29,6 +29,6 @@ $freeReq->setTimeZone($timeZone);
 
 $freeRsrc = $cal->freebusy;
 $freeResp = $freeRsrc->query($freeReq);
-$freeCal = $freeResp->getCalendars();
-//how to grab free and busy from TimePeriod?
+$freeCal = $freeResp->getCalendars(); //seems this line is problematic.
+//Notice: Undefined index: calendars in /home/jaml/dev/autoscheduler/lib/gapi/src/Google/Model.php on line 75 - issue with PHP API?
 ?>
