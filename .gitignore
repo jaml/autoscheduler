@@ -1,2 +1,8 @@
-# Don't push API keys to the public repo
-keys.php
+/bootstrap/compiled.php
+/vendor
+composer.phar
+composer.lock
+.env.local.php
+.env.php
+.DS_Store
+Thumbs.db
