@@ -2,10 +2,11 @@
 
 include_once '../secret.php';
 
-require_once '../lib/gapi/src/Google/Client.php';
-require_once '../lib/gapi/src/Google/Service/Calendar.php';
+set_include_path( get_include_path() . PATH_SEPARATOR . '../gapi/src/' );
+require_once '../gapi/src/Google/Client.php';
+require_once '../gapi/src/Google/Service/Calendar.php';
 
-$redirect = 'http://localhost:8080/gcal.php'; // change this later
+$redirect = 'http://localhost/src/gcal.php'; // change this later
 
 $client = new Google_Client();
 // Visit https://code.google.com/apis/console?api=calendar to generate your
@@ -14,7 +15,12 @@ $client = new Google_Client();
  $client->setClientSecret($gapi_client_secret);
  $client->setRedirectUri($redirect);
 // $client->setDeveloperKey('insert_your_developer_key');
-$cal = new Google_CalendarService($client);
+$cal = new Google_Service_Calendar($client);
+
+$client->addScope("https://www.googleapis.com/auth/calendar");
+    // +rw access to calendars. https://www.googleapis.com/auth/calendar.readonly
+	// for +r only
+
 if (isset($_GET['logout'])) {
   unset($_SESSION['token']);
 }
