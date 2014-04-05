@@ -40,7 +40,20 @@ if (isset($_SESSION['token']) && $_SESSION['token']) {
 
 if ($client->getAccessToken()) {
 	$calList = $cal->calendarList->listCalendarList();
-	print "<h1>Calendar List</h1><pre>" . print_r($calList, true) . "</pre>";
+	//print "<h1>Calendar List</h1><pre>" . print_r($calList, true) . "</pre>";
+	// grab calendars, present user with form to choose which calendar to use
+	// set id and then do a freeBusy query
+	$calIdList = array();
+	$calListIndex = 0;
+	foreach($calList as $calListEntry)
+	{
+		$calIdList[$calListIndex] = array($calListEntry['summary'], 
+			$calListEntry['id']);
+		$calListIndex += 1;
+	}
+	// show user a form of calendar names ('summary') to pick from
+	// TODO form here
+	
 	$_SESSION['token'] = $client->getAccessToken();
 } else {
 	$authUrl = $client->createAuthUrl();
